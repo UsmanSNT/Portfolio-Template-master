@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kirish</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="authContainer" class="auth-container">
+    <div class="auth-box" id="registerBox">
+      <h2>Ro'yxatdan o'tish</h2>
+      <input type="text" id="regId" placeholder="ID" required>
+      <input type="email" id="regEmail" placeholder="E-mail" required>
+      <input type="password" id="regPw" placeholder="Parol" required minlength="4">
+      <button onclick="register()">Ro'yxatdan o'tish</button>
+      <p class="auth-link">Akkountingiz bormi? <a href="#" onclick="showLogin()">Kirish</a></p>
+    </div>
+
+    <div class="auth-box" id="loginBox">
+      <h2>Kirish</h2>
+      <input type="text" id="loginId" placeholder="ID" required>
+      <input type="password" id="loginPw" placeholder="Parol" required>
+      <button onclick="login()">Kirish</button>
+      <p class="auth-link">Akkountingiz yo'qmi? <a href="#" onclick="showRegister()">Ro'yxatdan o'tish</a></p>
+    </div>
+  </div>
+
+  <div id="mainContainer" class="main-container" style="display:none">
+    <div class="table-header">
+      <h2>Reja jadvali</h2>
+      <div>
+        <select id="monthSelector" onchange="changeMonth()"></select>
+        <button onclick="logout()">Chiqish</button>
+      </div>
+    </div>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Sana</th>
+          <th>Reja</th>
+          <th>Izoh</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
