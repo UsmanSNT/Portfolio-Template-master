@@ -136,10 +136,11 @@ function loadMonthData() {
       <td>${row.date || ''}</td>
       <td ${row.author === currentUser ? 'contenteditable="true"' : ''}>${row.plan || ''}</td>
       <td ${row.author === currentUser ? 'contenteditable="true"' : ''}>${row.note || ''}</td>
+      <td>${row.author || '-'}</td>
     `;
     tableBody.appendChild(tr);
 
-    // Tahrirlash imkoniyati
+    // Faqat o‘z yozganlar o‘zgartira oladi
     if (row.author === currentUser) {
       tr.querySelectorAll('[contenteditable="true"]').forEach((cell, i) => {
         cell.addEventListener('input', () => {
@@ -151,7 +152,7 @@ function loadMonthData() {
     }
   });
 
-  // Joriy oy uchun yangi qator qo'shish
+  // Faqat hozirgi oy uchun yangi qator qo‘shiladi
   if (isCurrentMonth) {
     const tr = document.createElement('tr');
     tr.innerHTML = `
@@ -159,6 +160,7 @@ function loadMonthData() {
       <td>${today.toLocaleDateString()} ${today.toLocaleTimeString().slice(0, 5)}</td>
       <td contenteditable="true"></td>
       <td contenteditable="true"></td>
+      <td>${currentUser}</td>
     `;
 
     tr.querySelectorAll('[contenteditable="true"]').forEach((cell, i) => {
@@ -167,21 +169,22 @@ function loadMonthData() {
         const note = tr.cells[3].textContent.trim();
 
         if (plan && note) {
-          data.push({
+          data.unshift({
             date: tr.cells[1].textContent,
             plan,
             note,
             author: currentUser
           });
           saveStorageData(`data_${currentMonth}`, data);
-          loadMonthData(); // Yangilash
+          loadMonthData();
         }
       });
     });
 
-    tableBody.appendChild(tr);
+    tableBody.insertBefore(tr, tableBody.firstChild); // Yangi qator yuqoriga qo‘shiladi
   }
 }
+
 
 // Oyni o'zgartirish
 function changeMonth() {
