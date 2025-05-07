@@ -46,25 +46,29 @@ function register() {
   const pw = document.getElementById('regPw').value.trim();
 
   if (!id || !email || !pw) {
-    alert('Iltimos, barcha maydonlarni to\'ldiring!');
+    alert('Barcha maydonlarni to‘ldiring!');
     return;
   }
 
   if (users.some(u => u.id === id)) {
-    alert('Bu ID allaqachon band qilingan!');
+    alert('Bu ID band!');
     return;
   }
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    alert('Iltimos, to\'g\'ri email kiriting!');
+    alert('Email noto‘g‘ri!');
     return;
   }
 
-  users.push({ id, email, pw });
+  const newUser = { id, email, pw };
+  users.push(newUser);
   saveStorageData('users', users);
-  alert('Muvaffaqiyatli ro\'yxatdan o\'tdingiz!');
+  console.log('Saqlangan foydalanuvchilar:', users);
+
+  alert('Ro‘yxatdan o‘tish muvaffaqiyatli!');
   showLogin();
 }
+
 
 // Kirish
 function login() {
