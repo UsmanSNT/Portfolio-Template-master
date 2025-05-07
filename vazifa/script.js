@@ -24,7 +24,7 @@ let currentUser = null;
 let currentMonth = new Date().getMonth() + 1;
 
 // DOM yuklanganda
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   showLogin();
 });
 
@@ -96,12 +96,12 @@ function logout() {
 function loadMonthOptions() {
   const select = document.getElementById('monthSelector');
   select.innerHTML = '';
-  
+
   const months = [
     'Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun',
     'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'
   ];
-  
+
   months.forEach((month, index) => {
     const option = document.createElement('option');
     option.value = index + 1;
@@ -152,16 +152,16 @@ function loadMonthData() {
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td>${data.length + 1}</td>
-      <td>${today.toLocaleDateString()} ${today.toLocaleTimeString().slice(0,5)}</td>
+      <td>${today.toLocaleDateString()} ${today.toLocaleTimeString().slice(0, 5)}</td>
       <td contenteditable="true"></td>
       <td contenteditable="true"></td>
     `;
-    
+
     tr.querySelectorAll('[contenteditable="true"]').forEach((cell, i) => {
       cell.addEventListener('input', () => {
         const plan = tr.cells[2].textContent.trim();
         const note = tr.cells[3].textContent.trim();
-        
+
         if (plan && note) {
           data.push({
             date: tr.cells[1].textContent,
@@ -174,7 +174,7 @@ function loadMonthData() {
         }
       });
     });
-    
+
     tableBody.appendChild(tr);
   }
 }
